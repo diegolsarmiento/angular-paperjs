@@ -17,7 +17,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "angular-paperjs-lib": [
+        "dist/angular-paperjs-lib/angular-paperjs-lib",
+        "dist/angular-paperjs-lib"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
