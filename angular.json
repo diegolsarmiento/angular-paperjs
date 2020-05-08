@@ -30,9 +30,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-              "**/node_modules/paper/dist/paper-full.min.js"
-            ]
+            "scripts": []
           },
           "configurations": {
             "production": {
