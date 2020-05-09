@@ -52,7 +52,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
       y: 0,
       width: slides[0],
       height: 1201,
-      fillColor: colors[color0]
+      fillColor: colorPalettes[colors][color0]
     });
 
     // Create a new layer and activate it
@@ -60,11 +60,11 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
     // Sencod element
     this.secondPath = new Path.Rectangle({
-      x: 200,
+      x: slides[0],
       y: 0,
       width: slides[1],
       height: 1201,
-      fillColor: colors[color1]
+      fillColor: colorPalettes[colors][color1]
     });
 
     // Create a new layer and activate it
@@ -72,11 +72,11 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
     // Sencod element
     this.thirdPath = new Path.Rectangle({
-      x: 600,
+      x: slides[1],
       y: 0,
       width: slides[2],
       height: 1201,
-      fillColor: colors[color2]
+      fillColor: colorPalettes[colors][color2]
     });
 
     // Add child to layer
@@ -88,21 +88,28 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     const sideA = this.randomNumber(50, 200);
     const sideB = this.randomNumber(200, 400);
     const sideC = total - sideA - sideB;
+    console.log([sideA, sideB, sideC]);
     return [sideA, sideB, sideC];
   }
 
   randomNumber(min, max): number {
-    return Math.floor(Math.random() * (max - min) + min);
+    const random = Math.floor(Math.random() * (max - min) + min);
+    console.log(random);
+    return random;
   }
 
   getRandomInt(max): number {
-    return Math.floor(Math.random() * Math.floor(max));
+    const randomInt = Math.floor(Math.random() * Math.floor(max));
+    console.log(randomInt);
+    return randomInt;
   }
 
   randomPalette(): any {
     const numberKeys = Object.keys(colorPalettes).length - 1;
     const set = this.getRandomInt(numberKeys);
-    return Object.keys(colorPalettes)[set];
+    const value = Object.keys(colorPalettes)[set];
+    console.log(value);
+    return value;
   }
 
 }
