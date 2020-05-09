@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'plb-angular-paperjs-lib',
   template: `
-    <p> Angular Paperjs Lib </p>
+    <p> Angular PaperJS Lib </p>
   `,
   styles: []
 })
