@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PaperScope, Project, Path, Layer } from 'paper';
-import { canvasSize } from '../settings';
+import { canvasSize, colorPalettes } from '../settings';
 
 @Component({
   selector: 'plb-paper-canvas',
@@ -41,13 +41,18 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   addElements() {
     // First element
     this.currentPath = new Path();
+    const slides = this.slideSizes();
+    const colors = this.randomPalette();
+    const color0 = 'color0';
+    const color1 = 'color1';
+    const color2 = 'color2';
 
     this.path = new Path.Rectangle({
       x: 0,
       y: 0,
-      width: 200,
+      width: slides[0],
       height: 1201,
-      fillColor: '#272635'
+      fillColor: colors[color0]
     });
 
     // Create a new layer and activate it
@@ -57,9 +62,9 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     this.secondPath = new Path.Rectangle({
       x: 200,
       y: 0,
-      width: 400,
+      width: slides[1],
       height: 1201,
-      fillColor: '#FF3F00'
+      fillColor: colors[color1]
     });
 
     // Create a new layer and activate it
@@ -69,13 +74,35 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     this.thirdPath = new Path.Rectangle({
       x: 600,
       y: 0,
-      width: 101,
+      width: slides[2],
       height: 1201,
-      fillColor: '#F0F0F0'
+      fillColor: colors[color2]
     });
 
     // Add child to layer
     this.project.activeLayer.addChild(this.currentPath);
+  }
+
+  slideSizes(): number[] {
+    const total = 701;
+    const sideA = this.randomNumber(50, 200);
+    const sideB = this.randomNumber(200, 400);
+    const sideC = total - sideA - sideB;
+    return [sideA, sideB, sideC];
+  }
+
+  randomNumber(min, max): number {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
+  getRandomInt(max): number {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  randomPalette(): any {
+    const numberKeys = Object.keys(colorPalettes).length - 1;
+    const set = this.getRandomInt(numberKeys);
+    return Object.keys(colorPalettes)[set];
   }
 
 }
