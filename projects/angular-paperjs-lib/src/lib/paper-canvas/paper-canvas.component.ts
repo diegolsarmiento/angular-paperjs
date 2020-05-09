@@ -21,6 +21,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   path: any;
   secondLayer: any;
   secondPath: any;
+  thirdLayer: any;
+  thirdPath: any;
 
   constructor() { }
 
@@ -37,22 +39,39 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   }
 
   addElements() {
-    // Create a circle shaped path
+    // First element
     this.currentPath = new Path();
-    this.path = new Path.Circle({
-      center: [80, 80],
-      radius: 35,
-      fillColor: '#ffa600'
+
+    this.path = new Path.Rectangle({
+      x: 0,
+      y: 0,
+      width: 200,
+      height: 1201,
+      fillColor: '#272635'
     });
 
     // Create a new layer and activate it
     this.secondLayer = new Layer();
 
-    // Second path is added as a child of the second layer
-    this.secondPath = new Path.Circle({
-      center: [120, 300],
-      radius: 80,
-      fillColor: '#003f5c'
+    // Sencod element
+    this.secondPath = new Path.Rectangle({
+      x: 200,
+      y: 0,
+      width: 400,
+      height: 1201,
+      fillColor: '#FF3F00'
+    });
+
+    // Create a new layer and activate it
+    this.thirdLayer = new Layer();
+
+    // Sencod element
+    this.thirdPath = new Path.Rectangle({
+      x: 600,
+      y: 0,
+      width: 101,
+      height: 1201,
+      fillColor: '#F0F0F0'
     });
 
     // Add child to layer
