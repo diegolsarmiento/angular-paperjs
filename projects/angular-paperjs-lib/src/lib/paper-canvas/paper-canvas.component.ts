@@ -40,9 +40,9 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     // Create a circle shaped path
     this.currentPath = new Path();
     this.path = new Path.Circle({
-      center: [80, 50],
+      center: [80, 80],
       radius: 35,
-      fillColor: 'red'
+      fillColor: '#ffa600'
     });
 
     // Create a new layer and activate it
@@ -50,9 +50,9 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
     // Second path is added as a child of the second layer
     this.secondPath = new Path.Circle({
-      center: [120, 50],
-      radius: 35,
-      fillColor: '#00FF00'
+      center: [120, 300],
+      radius: 80,
+      fillColor: '#003f5c'
     });
 
     // Add child to layer
