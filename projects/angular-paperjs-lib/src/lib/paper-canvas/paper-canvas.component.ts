@@ -18,9 +18,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
   /* addElements */
   firstPath: any;
-  secondLayer: any;
   secondPath: any;
-  thirdLayer: any;
   thirdPath: any;
 
   constructor() { }
@@ -40,7 +38,6 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   addElements() {
     // First element
     const slides = this.slideSizes();
-    console.log('slides: ', slides);
     const colors = this.randomPalette(colorPalettes);
     const color0 = 'color0';
     const color1 = 'color1';
@@ -51,31 +48,29 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
       y: 0,
       width: slides[0],
       height: 1201,
-      fillColor: colorPalettes[colors][color0]
+      fillColor: colorPalettes[colors][color0],
+      blendMode: 'multiply'
     });
 
-    // Create a new layer and activate it
-    this.secondLayer = new Layer();
-
-    // Sencod element
+    // Second element
     this.secondPath = new Path.Rectangle({
       x: slides[0],
       y: 0,
       width: slides[1],
       height: 1201,
-      fillColor: colorPalettes[colors][color1]
+      fillColor: colorPalettes[colors][color1],
+      blendMode: 'multiply'
     });
 
-    // Create a new layer and activate it
-    this.thirdLayer = new Layer();
-
-    // Sencod element
+    // Third element
+    const thirdWidth = slides[0] + slides[1];
     this.thirdPath = new Path.Rectangle({
-      x: slides[1],
+      x: thirdWidth,
       y: 0,
       width: slides[2],
       height: 1201,
-      fillColor: colorPalettes[colors][color2]
+      fillColor: colorPalettes[colors][color2],
+      blendMode: 'multiply'
     });
 
     // Add child to layer
@@ -86,8 +81,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
   slideSizes(): number[] {
     const total = 701;
-    const sideA = this.randomNumber(50, 200);
-    const sideB = this.randomNumber(300, 400);
+    const sideA = this.randomNumber(50, 150);
+    const sideB = this.randomNumber(150, 400);
     const sideC = total - sideA - sideB;
     return [sideA, sideB, sideC];
   }
