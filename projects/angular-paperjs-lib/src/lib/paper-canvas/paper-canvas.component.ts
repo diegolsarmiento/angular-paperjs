@@ -17,8 +17,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   project: any;
 
   /* addElements */
-  currentPath: any;
-  path: any;
+  firstPath: any;
   secondLayer: any;
   secondPath: any;
   thirdLayer: any;
@@ -40,14 +39,14 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
   addElements() {
     // First element
-    this.currentPath = new Path();
     const slides = this.slideSizes();
-    const colors = this.randomPalette();
+    console.log('slides: ', slides);
+    const colors = this.randomPalette(colorPalettes);
     const color0 = 'color0';
     const color1 = 'color1';
     const color2 = 'color2';
 
-    this.path = new Path.Rectangle({
+    this.firstPath = new Path.Rectangle({
       x: 0,
       y: 0,
       width: slides[0],
@@ -80,36 +79,34 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     });
 
     // Add child to layer
-    this.project.activeLayer.addChild(this.currentPath);
+    this.project.activeLayer.addChild(this.firstPath);
+    this.project.activeLayer.addChild(this.secondPath);
+    this.project.activeLayer.addChild(this.thirdPath);
   }
 
   slideSizes(): number[] {
     const total = 701;
     const sideA = this.randomNumber(50, 200);
-    const sideB = this.randomNumber(200, 400);
+    const sideB = this.randomNumber(300, 400);
     const sideC = total - sideA - sideB;
-    console.log([sideA, sideB, sideC]);
     return [sideA, sideB, sideC];
   }
 
   randomNumber(min, max): number {
     const random = Math.floor(Math.random() * (max - min) + min);
-    console.log(random);
     return random;
   }
 
   getRandomInt(max): number {
     const randomInt = Math.floor(Math.random() * Math.floor(max));
-    console.log(randomInt);
     return randomInt;
   }
 
-  randomPalette(): any {
-    const numberKeys = Object.keys(colorPalettes).length - 1;
+  randomPalette(palettes): any {
+    const numberKeys = Object.keys(palettes).length;
     const set = this.getRandomInt(numberKeys);
-    const value = Object.keys(colorPalettes)[set];
-    console.log(value);
-    return value;
+    const palette = Object.keys(colorPalettes)[set];
+    return palette;
   }
 
 }
