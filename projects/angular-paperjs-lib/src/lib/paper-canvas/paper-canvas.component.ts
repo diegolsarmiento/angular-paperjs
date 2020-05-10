@@ -42,7 +42,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     for (let slice = 0; slice < sliceNumber; slice ++) {
-      let width = this.randomNumber(40, 120);
+      let width = this.randomNumber(30, 300);
       if (totalSides && (slice === sliceNumber - 1)) {
         width = 701 - totalSides;
       }
