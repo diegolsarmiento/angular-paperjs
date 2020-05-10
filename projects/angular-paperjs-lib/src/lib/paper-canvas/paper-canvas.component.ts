@@ -18,8 +18,6 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
   /* addElements */
   firstPath: any;
-  secondPath: any;
-  thirdPath: any;
 
   constructor() { }
 
@@ -36,55 +34,38 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   }
 
   addElements() {
-    // First element
-    const slides = this.slideSizes();
-    const colors = this.randomPalette(colorPalettes);
-    const color0 = 'color0';
-    const color1 = 'color1';
-    const color2 = 'color2';
+    const sliceNumber = this.randomNumber(3, 9);
+    let x = 0;
+    const sides = [];
+    let totalSides;
+    const palettes = this.randomPalette(colorPalettes);
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-    this.firstPath = new Path.Rectangle({
-      x: 0,
-      y: 0,
-      width: slides[0],
-      height: 1201,
-      fillColor: colorPalettes[colors][color0],
-      blendMode: 'multiply'
-    });
+    for (let slice = 0; slice < sliceNumber; slice ++) {
+      let width = this.randomNumber(40, 120);
+      if (totalSides && (slice === sliceNumber - 1)) {
+        width = 701 - totalSides;
+      }
+      sides.push(width);
+      totalSides = sides.reduce(reducer);
+      const color = 'color' + slice;
+      if (slice > 0) {
+        x += sides[slice - 1];
+      }
+      console.log('x', x);
+      console.log('width', width);
+      console.log('color', colorPalettes[palettes][color]);
+      this.firstPath = new Path.Rectangle({
+        x,
+        y: 0,
+        width,
+        height: 1201,
+        fillColor: colorPalettes[palettes][color],
+        blendMode: 'multiply'
+      });
 
-    // Second element
-    this.secondPath = new Path.Rectangle({
-      x: slides[0],
-      y: 0,
-      width: slides[1],
-      height: 1201,
-      fillColor: colorPalettes[colors][color1],
-      blendMode: 'multiply'
-    });
-
-    // Third element
-    const thirdWidth = slides[0] + slides[1];
-    this.thirdPath = new Path.Rectangle({
-      x: thirdWidth,
-      y: 0,
-      width: slides[2],
-      height: 1201,
-      fillColor: colorPalettes[colors][color2],
-      blendMode: 'multiply'
-    });
-
-    // Add child to layer
-    this.project.activeLayer.addChild(this.firstPath);
-    this.project.activeLayer.addChild(this.secondPath);
-    this.project.activeLayer.addChild(this.thirdPath);
-  }
-
-  slideSizes(): number[] {
-    const total = 701;
-    const sideA = this.randomNumber(50, 150);
-    const sideB = this.randomNumber(150, 400);
-    const sideC = total - sideA - sideB;
-    return [sideA, sideB, sideC];
+      this.project.activeLayer.addChild(this.firstPath);
+    }
   }
 
   randomNumber(min, max): number {
