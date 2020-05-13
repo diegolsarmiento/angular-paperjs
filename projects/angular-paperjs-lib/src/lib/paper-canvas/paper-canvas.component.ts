@@ -54,9 +54,6 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
       if (slice > 0) {
         x += sides[slice - 1];
       }
-      console.log('x', x);
-      console.log('width', width);
-      console.log('color', colorPalettes[palettes][color]);
       this.firstPath = new Path.Rectangle({
         x,
         y: 0,
