@@ -1,5 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Fjalla+One);
+@import url(https://fonts.googleapis.com/css?family=Teko);
+
 .home-content {
     background: transparent;
     margin: 0;
     padding: 0;
+}
+
+.home-text {
+    display: block;
+    position: absolute;
+    color: #fff;
+    opacity: 0.4;
+    z-index: 2;
+    top: 55vh;
+    left: calc(700px - 35vh);
 }
