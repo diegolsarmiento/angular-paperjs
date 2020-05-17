@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { PaperScope, Project, Path, Layer } from 'paper';
+import { PaperScope, Project, Path } from 'paper';
 import { colorPalettes } from '../settings';
 
 @Component({
@@ -18,6 +18,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   width: number;
   scope: any;
   project: any;
+  layer: any;
 
   /* addElements */
   firstPath: any;
@@ -37,19 +38,27 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   }
 
   addElements() {
-    const sliceNumber = this.randomNumber(3, 9);
+    let realWidth;
+    let realHeight;
+    let realX;
+    let realY;
+    const sliceNumber = this.randomNumber(8, 9);
     let x = 0;
     const sides = [];
     let totalSides;
     const palettes = this.randomPalette(colorPalettes);
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
-    for (let slice = 0; slice < sliceNumber; slice ++) {
-      const initNumber = this.getRandomInt(30);
-      const lastNumber = this.getRandomInt(60);
+    for (let slice = 0; slice <= sliceNumber; slice ++) {
+      const initNumber = this.getRandomInt(45);
+      const lastNumber = this.getRandomInt(70);
       let width = this.randomNumber(initNumber, lastNumber);
       if (totalSides && (slice === sliceNumber - 1)) {
-        width = this.width - totalSides;
+        if (this.width > this.height) {
+          width = this.height - totalSides;
+        } else {
+          width = this.width - totalSides;
+        }
       }
       sides.push(width);
       totalSides = sides.reduce(reducer);
@@ -57,16 +66,47 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
       if (slice > 0) {
         x += sides[slice - 1];
       }
+      if (this.width > this.height) {
+        if (totalSides && (slice === sliceNumber)) {
+          realWidth = this.width;
+          realHeight = this.height;
+          realX = 0;
+          realY = 0;
+        } else {
+          realWidth = this.getRandomInt(this.width);
+          realHeight = width;
+          realX = 0;
+          realY = x;
+        }
+      } else {
+        if (totalSides && (slice === sliceNumber)) {
+          realWidth = this.width;
+          realHeight = this.height;
+          realX = 0;
+          realY = 0;
+        } else {
+          realWidth = width;
+          realHeight = this.getRandomInt(this.height);
+          realX = x;
+          realY = 0;
+        }
+      }
       this.firstPath = new Path.Rectangle({
-        x,
-        y: 0,
-        width,
-        height: this.height,
+        x: realX,
+        y: realY,
+        width: realWidth,
+        height: realHeight,
         fillColor: colorPalettes[palettes][color],
         blendMode: 'multiply'
       });
-
-      this.project.activeLayer.addChild(this.firstPath);
+      if (totalSides && (slice === sliceNumber)) {
+        this.project.activeLayer.addChild(this.firstPath).sendToBack();
+      } else {
+        this.project.activeLayer.addChild(this.firstPath);
+      }
+      console.log('palettes', palettes);
+      console.log('color', color);
+      console.log('colorPalettes[palettes][color]', colorPalettes[palettes][color]);
     }
   }
 
