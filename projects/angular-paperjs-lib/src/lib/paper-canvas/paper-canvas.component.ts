@@ -44,7 +44,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     for (let slice = 0; slice < sliceNumber; slice ++) {
       const initNumber = this.getRandomInt(30);
       const lastNumber = this.getRandomInt(60);
-      let width = this.randomNumber(initNumber, lastNumber);
+      let width = this.randomNumber(initNumber, lastNumber + initNumber);
       if (totalSides && (slice === sliceNumber - 1)) {
         width = 701 - totalSides;
       }
@@ -82,6 +82,15 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     const set = this.getRandomInt(numberKeys);
     const palette = Object.keys(colorPalettes)[set];
     return palette;
+  }
+
+  download() {
+     const fileName = 'custom.svg';
+     const url = 'data:image/svg+xml;utf8,' + encodeURIComponent(this.project.exportSVG({asString: true}));
+     const link = document.createElement('a');
+     link.download = fileName;
+     link.href = url;
+     link.click();
   }
 
 }
