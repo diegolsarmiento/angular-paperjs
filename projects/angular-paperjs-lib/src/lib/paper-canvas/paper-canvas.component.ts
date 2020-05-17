@@ -1,6 +1,6 @@
-import { Component, AfterViewInit, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { PaperScope, Project, Path, Layer } from 'paper';
-import { canvasSize, colorPalettes } from '../settings';
+import { colorPalettes } from '../settings';
 
 @Component({
   selector: 'plb-paper-canvas',
@@ -9,10 +9,13 @@ import { canvasSize, colorPalettes } from '../settings';
 })
 export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
+  @Input() availableWidth: number;
+  @Input() availableHeight: number;
+
   @ViewChild('canvasElement') canvasElement: ElementRef;
    /* Basic config */
-  height: string;
-  width: string;
+  height: number;
+  width: number;
   scope: any;
   project: any;
 
@@ -23,8 +26,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     /* Basic config */
-    this.height = canvasSize.height;
-    this.width = canvasSize.width;
+    this.height = this.availableHeight;
+    this.width = this.availableWidth;
     this.scope = new PaperScope();
   }
 
@@ -44,9 +47,9 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     for (let slice = 0; slice < sliceNumber; slice ++) {
       const initNumber = this.getRandomInt(30);
       const lastNumber = this.getRandomInt(60);
-      let width = this.randomNumber(initNumber, lastNumber + initNumber);
+      let width = this.randomNumber(initNumber, lastNumber);
       if (totalSides && (slice === sliceNumber - 1)) {
-        width = 701 - totalSides;
+        width = this.width - totalSides;
       }
       sides.push(width);
       totalSides = sides.reduce(reducer);
@@ -58,7 +61,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
         x,
         y: 0,
         width,
-        height: 1201,
+        height: this.height,
         fillColor: colorPalettes[palettes][color],
         blendMode: 'multiply'
       });

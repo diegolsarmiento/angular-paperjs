@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  availableWidth: number;
+  availableHeight: number;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.availableWidth = 701;
+    this.availableHeight = 1201;
   }
 
 }

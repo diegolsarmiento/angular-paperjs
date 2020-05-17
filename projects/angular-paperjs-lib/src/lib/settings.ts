@@ -1,8 +1,3 @@
-export const canvasSize = {
-    width: '700',
-    height: '1200'
-};
-
 export const colorPalettes = {
     set3A: {
         color0: '#D4EF83',
