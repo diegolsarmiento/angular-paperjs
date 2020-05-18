@@ -73,10 +73,17 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
           realX = 0;
           realY = 0;
         } else {
-          realWidth = this.getRandomInt(this.width);
-          realHeight = width;
-          realX = 0;
-          realY = x;
+          if (slice === sliceNumber - 1) {
+            realWidth = this.width;
+            realHeight = this.height;
+            realX = 0;
+            realY = x;
+          } else {
+            realWidth = this.getRandomInt(this.width);
+            realHeight = width;
+            realX = 0;
+            realY = x;
+          }
         }
       } else {
         if (totalSides && (slice === sliceNumber)) {
@@ -85,10 +92,17 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
           realX = 0;
           realY = 0;
         } else {
-          realWidth = width;
-          realHeight = this.getRandomInt(this.height);
-          realX = x;
-          realY = 0;
+          if (slice === sliceNumber - 1) {
+            realWidth = width;
+            realHeight = this.height;
+            realX = x;
+            realY = 0;
+          } else {
+            realWidth = width;
+            realHeight = this.getRandomInt(this.height);
+            realX = x;
+            realY = 0;
+          }
         }
       }
       this.firstPath = new Path.Rectangle({
