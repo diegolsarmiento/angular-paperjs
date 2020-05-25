@@ -19,6 +19,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   scope: any;
   project: any;
   layer: any;
+  colorArray = [];
 
   /* addElements */
   firstPath: any;
@@ -62,7 +63,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
       }
       sides.push(width);
       totalSides = sides.reduce(reducer);
-      const color = 'color' + slice;
+      const colorSlide =  this.checkColorDuplicated(sliceNumber, this.colorArray);
+      const color = 'color' + colorSlide;
       if (slice > 0) {
         x += sides[slice - 1];
       }
@@ -148,6 +150,22 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
      link.download = fileName;
      link.href = url;
      link.click();
+  }
+
+  checkColorDuplicated(sliceNumber, colorArray): number {
+    let colorSlide = this.getRandomInt(sliceNumber);
+    if (colorArray.indexOf(colorSlide) === -1) {
+      colorArray.push(colorSlide);
+    } else {
+      for (let item = 0; item <= sliceNumber; item ++) {
+        if (colorArray.indexOf(item) === -1) {
+          colorSlide = item;
+          colorArray.push(colorSlide);
+          break;
+        }
+      }
+    }
+    return colorSlide;
   }
 
 }
