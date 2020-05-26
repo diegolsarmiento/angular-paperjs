@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { PaperScope, Project, Path } from 'paper';
+import { PaperScope, Project, Path, Color, Point } from 'paper';
 import { colorPalettes } from '../settings';
 
 @Component({
@@ -51,8 +51,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     for (let slice = 0; slice <= sliceNumber; slice ++) {
-      const initNumber = this.randomNumber(40, 60);
-      const lastNumber = this.randomNumber(70, 120);
+      const initNumber = this.randomNumber(20, 60);
+      const lastNumber = this.randomNumber(30, 100);
       let width = this.randomNumber(initNumber, lastNumber);
       if (totalSides && (slice === sliceNumber - 1)) {
         if (this.width > this.height) {
@@ -112,7 +112,10 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
         y: realY,
         width: realWidth,
         height: realHeight,
-        fillColor: colorPalettes[palettes][color]
+        fillColor: colorPalettes[palettes][color],
+        shadowColor: new Color(0, 0, 0),
+        shadowBlur: 12,
+        shadowOffset: new Point(4, 4)
       });
       if (totalSides && (slice === sliceNumber)) {
         this.project.activeLayer.addChild(this.firstPath).sendToBack();
