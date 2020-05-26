@@ -49,9 +49,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     let totalSides;
     const palettes = this.randomPalette(colorPalettes);
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
-
     for (let slice = 0; slice <= sliceNumber; slice ++) {
-      const initNumber = this.randomNumber(20, 60);
+      const initNumber = this.randomNumber(40, 80);
       const lastNumber = this.randomNumber(30, 100);
       let width = this.randomNumber(initNumber, lastNumber);
       if (totalSides && (slice === sliceNumber - 1)) {
@@ -91,14 +90,14 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
         if (totalSides && (slice === sliceNumber)) {
           realWidth = this.width;
           realHeight = this.height;
-          realX = 0;
-          realY = 0;
+          realX = -300;
+          realY = -400;
         } else {
           if (slice === sliceNumber - 1) {
-            realWidth = width;
-            realHeight = this.height;
-            realX = x;
-            realY = 0;
+            realWidth = width * 2;
+            realHeight = this.height * 2;
+            realX = -150;
+            realY = -150;
           } else {
             realWidth = width;
             realHeight = this.getRandomInt(this.height);
@@ -117,6 +116,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
         shadowBlur: 12,
         shadowOffset: new Point(4, 4)
       });
+      this.firstPath.rotate(45);
       if (totalSides && (slice === sliceNumber)) {
         this.project.activeLayer.addChild(this.firstPath).sendToBack();
       } else {
