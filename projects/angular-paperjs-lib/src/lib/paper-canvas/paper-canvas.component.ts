@@ -43,7 +43,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     let realHeight;
     let realX;
     let realY;
-    const sliceNumber = this.randomNumber(8, 9);
+    const sliceNumber = this.randomNumber(3, 9);
     let x = 0;
     const sides = [];
     let totalSides;
@@ -51,8 +51,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
 
     for (let slice = 0; slice <= sliceNumber; slice ++) {
-      const initNumber = this.getRandomInt(60);
-      const lastNumber = this.getRandomInt(80);
+      const initNumber = this.randomNumber(40, 60);
+      const lastNumber = this.randomNumber(70, 120);
       let width = this.randomNumber(initNumber, lastNumber);
       if (totalSides && (slice === sliceNumber - 1)) {
         if (this.width > this.height) {
@@ -119,10 +119,6 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
       } else {
         this.project.activeLayer.addChild(this.firstPath);
       }
-      console.log('palettes', palettes);
-      console.log('color', color);
-      console.log('colorPalettes[palettes][color]', colorPalettes[palettes][color]);
-      console.log('type', typeof colorPalettes[palettes][color]);
     }
   }
 
