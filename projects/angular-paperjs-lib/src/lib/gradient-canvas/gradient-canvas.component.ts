@@ -40,7 +40,7 @@ export class GradientCanvasComponent implements OnInit, AfterViewInit {
   }
 
   addBackground(): void {
-    const sliceNumber = 1 + this.functions.getRandomInt(5);
+    const sliceNumber = this.functions.getRandomInt(5);
     const x = 0;
     const y = 0;
     const sides = [];
@@ -52,14 +52,14 @@ export class GradientCanvasComponent implements OnInit, AfterViewInit {
       sides.push(width);
 
       const colorSlide1 =  this.functions.checkColorDuplicated(sliceNumber, this.colorArray);
-      const colorSlide2 =  this.functions.checkColorDuplicated(sliceNumber + 1, this.colorArray);
-      const colorSlide3 =  this.functions.checkColorDuplicated(sliceNumber + 2, this.colorArray);
+      const colorSlide2 =  this.functions.checkColorDuplicated(sliceNumber + this.functions.getRandomInt(4), this.colorArray);
+      const colorSlide3 =  this.functions.checkColorDuplicated(this.functions.getRandomInt(9), this.colorArray);
 
       const color1 = 'color' + colorSlide1;
       const color2 = 'color' + colorSlide2;
       const color3 = 'color' + colorSlide3;
 
-      const center =  new Point( (width / 2) , (height / 2));
+      const center =  new Point( (width / 2) , (height / 5));
       const bottomCenter = new Point( (width / 2) , height);
 
       this.firstPath = new Path.Rectangle({
