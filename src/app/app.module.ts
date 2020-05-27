@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AngularPaperjsLibModule } from 'angular-paperjs-lib';
 import { BannerComponent } from './banner/banner.component';
+import { PosterComponent } from './poster/poster.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    BannerComponent
+    BannerComponent,
+    PosterComponent
   ],
   imports: [
     BrowserModule,

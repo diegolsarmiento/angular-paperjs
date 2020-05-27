@@ -9,3 +9,4 @@ export * from './lib/angular-paperjs-lib.module';
 /* PaperJS Components & Dependencies */
 export * from './lib/settings';
 export * from './lib/paper-canvas/paper-canvas.component';
+export * from './lib/gradient-canvas/gradient-canvas.component';
