@@ -36,6 +36,7 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.project = new Project(this.canvasElement.nativeElement);
     this.addElements();
+    this.addElements();
   }
 
   addElements() {
@@ -50,8 +51,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
     const palettes = this.randomPalette(colorPalettes);
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     for (let slice = 0; slice <= sliceNumber; slice ++) {
-      const initNumber = this.randomNumber(40, 80);
-      const lastNumber = this.randomNumber(30, 100);
+      const initNumber = this.randomNumber(20, 40);
+      const lastNumber = this.randomNumber(60, 120);
       let width = this.randomNumber(initNumber, lastNumber);
       if (totalSides && (slice === sliceNumber - 1)) {
         if (this.width > this.height) {
@@ -117,6 +118,8 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
         shadowOffset: new Point(4, 4)
       });
       this.firstPath.rotate(45);
+      const scale = this.randomNumber(0.8, 1.6);
+      this.firstPath.scale(scale);
       if (totalSides && (slice === sliceNumber)) {
         this.project.activeLayer.addChild(this.firstPath).sendToBack();
       } else {
@@ -165,6 +168,11 @@ export class PaperCanvasComponent implements OnInit, AfterViewInit {
       }
     }
     return colorSlide;
+  }
+
+  randomDecimal(min, max): number {
+    const random = (Math.random() * (max - min) + min).toFixed(2);
+    return random;
   }
 
 }
